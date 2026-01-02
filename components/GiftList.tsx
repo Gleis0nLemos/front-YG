@@ -1,8 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { useSearchParams } from "next/navigation";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { GiftConfirmModal } from "./GiftConfirmModal";
+
+type Gift = {
+  id: number;
+  name: string;
+  available: boolean;
+  reservedBy?: string;
+};
 
 const container: Variants = {
   hidden: {},
@@ -24,24 +32,44 @@ const item: Variants = {
 };
 
 export function GiftList() {
-  const [selectedGift, setSelectedGift] = useState<string | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const isAdmin = searchParams.get("admin") === "amor2025";
 
-  const gifts = [
+  const [gifts, setGifts] = useState<Gift[]>([
     { id: 1, name: "Jogo de pratos", available: true },
-    { id: 2, name: "Liquidificador", available: false },
+    { id: 2, name: "Liquidificador", available: false, reservedBy: "Maria" },
     { id: 3, name: "Conjunto de copos", available: true },
-  ];
+  ]);
 
-  function handleSelectGift(name: string) {
-    setSelectedGift(name);
+  const [selectedGiftId, setSelectedGiftId] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [toast, setToast] = useState(false);
+
+  function handleSelectGift(id: number) {
+    setSelectedGiftId(id);
     setModalOpen(true);
   }
 
-  function handleConfirm() {
-    console.log("Presente confirmado:", selectedGift);
+  function handleConfirm(data: { name: string; whatsapp: string }) {
+    setGifts((prev) =>
+      prev.map((gift) =>
+        gift.id === selectedGiftId
+          ? {
+              ...gift,
+              available: false,
+              reservedBy: data.name,
+            }
+          : gift
+      )
+    );
+
     setModalOpen(false);
+    setToast(true);
+
+    setTimeout(() => setToast(false), 3000);
   }
+
+  const currentGift = gifts.find((g) => g.id === selectedGiftId);
 
   return (
     <>
@@ -72,14 +100,14 @@ export function GiftList() {
           {/* Grid */}
           <motion.div
             variants={container}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           >
             {gifts.map((gift) => (
               <motion.div
                 key={gift.id}
                 variants={item}
                 className={`
-                  rounded-2xl border p-6
+                  rounded-2xl border p-6 transition
                   ${
                     gift.available
                       ? "bg-background hover:shadow-lg"
@@ -91,22 +119,37 @@ export function GiftList() {
                   {gift.name}
                 </h3>
 
-                <button
-                  disabled={!gift.available}
-                  onClick={() => handleSelectGift(gift.name)}
-                  className={`
-                    w-full rounded-full px-4 py-2
-                    text-xs uppercase tracking-widest
-                    transition
-                    ${
-                      gift.available
-                        ? "border border-accent text-accent hover:bg-accent hover:text-background"
-                        : "border border-border text-secondary cursor-not-allowed"
-                    }
-                  `}
-                >
-                  {gift.available ? "Escolher presente" : "Já escolhido"}
-                </button>
+                {gift.available ? (
+  <button
+    onClick={() => handleSelectGift(gift.id)}
+    className="
+      w-full rounded-full px-4 py-2
+      text-xs uppercase tracking-widest
+      border border-accent
+      text-accent
+      transition
+      hover:bg-accent hover:text-background
+    "
+  >
+    Escolher presente
+  </button>
+) : (
+  <button
+    disabled
+    className="
+      w-full rounded-full px-4 py-2
+      text-xs uppercase tracking-widest
+      border border-border
+      text-secondary
+      cursor-default
+    "
+  >
+    {isAdmin
+      ? `Reservado por ${gift.reservedBy}`
+      : "Já escolhido"}
+  </button>
+)}
+
               </motion.div>
             ))}
           </motion.div>
@@ -116,10 +159,30 @@ export function GiftList() {
       {/* Modal */}
       <GiftConfirmModal
         open={modalOpen}
-        giftName={selectedGift}
+        giftName={currentGift?.name ?? null}
         onClose={() => setModalOpen(false)}
         onConfirm={handleConfirm}
       />
+
+      {/* Toast */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            className="
+              fixed bottom-6 left-1/2 -translate-x-1/2
+              bg-black text-white
+              px-6 py-3 rounded-full
+              text-xs tracking-wide
+              shadow-lg
+            "
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+          >
+            Presente reservado com carinho 💛
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

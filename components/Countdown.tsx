@@ -9,7 +9,7 @@ type TimeLeft = {
   seconds: number;
 };
 
-const TARGET_DATE = new Date("2026-05-10T16:00:00-03:00");
+const TARGET_DATE = new Date("2026-02-28T16:00:00-03:00");
 
 function getTimeLeft(targetDate: Date): TimeLeft {
   const total = targetDate.getTime() - Date.now();

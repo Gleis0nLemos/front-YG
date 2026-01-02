@@ -71,7 +71,7 @@ export function Hero() {
         />
 
         <motion.div variants={item} className="space-y-1 text-secondary">
-          <p>10 de Maio • 16h</p>
+          <p>28 de Fevereiro • 16h</p>
           <p>Rua Exemplo, 123 — Centro</p>
         </motion.div>
 
