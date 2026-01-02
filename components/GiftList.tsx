@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { GiftConfirmModal } from "./GiftConfirmModal";
+import { Eye } from "lucide-react";
+import { AddGiftButton } from "./AddGiftButton";
 
 type Gift = {
   id: number;
@@ -50,6 +52,7 @@ const cardVariants: Variants = {
 
 
 export function GiftList() {
+
   const searchParams = useSearchParams();
   const isAdmin = searchParams.get("admin") === "amor2025";
 
@@ -86,8 +89,21 @@ export function GiftList() {
 
     setTimeout(() => setToast(false), 3000);
   }
+  
+  function handleAddGift(name: string) {
+    setGifts((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        name,
+        available: true,
+      },
+    ]);
+  }
+
 
   const currentGift = gifts.find((g) => g.id === selectedGiftId);
+  
 
   return (
     <>
@@ -96,11 +112,10 @@ export function GiftList() {
         className="py-32 px-6 bg-background text-foreground"
       >
         <motion.div
-          className="mx-auto max-w-5xl"
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+            className="mx-auto max-w-5xl"
+            variants={container}
+            initial="hidden"
+            animate="visible"
         >
           {/* Header */}
           <motion.div variants={item} className="text-center mb-16">
@@ -115,6 +130,12 @@ export function GiftList() {
             </p>
           </motion.div>
 
+          {isAdmin && (
+            <motion.div variants={item} className="flex justify-center">
+              <AddGiftButton onAdd={handleAddGift} />
+            </motion.div>
+          )}
+
           {/* Grid */}
           <motion.div
             variants={container}
@@ -123,13 +144,16 @@ export function GiftList() {
             {gifts.map((gift) => (
               <motion.div
                 key={gift.id}
-                variants={item} // entrada (fade + y)
+                variants={item}
+                initial="hidden"
+  animate="visible" // entrada (fade + y)
               >
                 <motion.div
                   variants={cardVariants} // estado (available / reserved)
                   animate={gift.available ? "available" : "reserved"}
                   initial="available"
                   className={`
+                    relative
                     rounded-2xl border p-6
                     transition-shadow
                     ${
@@ -139,6 +163,41 @@ export function GiftList() {
                     }
                   `}
                 >
+                  <AnimatePresence>
+                    {isAdmin && (
+                      <motion.div
+                        key="admin-icon"
+                        initial={{ opacity: 0, scale: 0.85, y: -4 }}
+                        whileHover={{ opacity: 1}}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.85, y: -4 }}
+                        transition={{
+                          duration: 0.35,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="absolute top-4 right-4 group"
+                      >
+                        <Eye
+                          size={16}
+                          className="text-secondary opacity-60 group-hover:opacity-100 transition"
+                        />
+
+                        <span
+                          className="
+                            pointer-events-none
+                            absolute right-0 mt-2
+                            whitespace-nowrap
+                            rounded-md bg-black px-2 py-1
+                            text-[10px] uppercase tracking-widest text-white
+                            opacity-0 group-hover:opacity-100
+                            transition
+                          "
+                        >
+                          visão admin
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                   <h3 className="font-serif text-lg mb-4">
                     {gift.name}
                   </h3>
