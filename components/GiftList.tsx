@@ -31,6 +31,24 @@ const item: Variants = {
   },
 };
 
+const cardVariants: Variants = {
+  available: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+  },
+  reserved: {
+    opacity: 0.6,
+    scale: 0.98,
+    y: 4,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut",
+    },
+  },
+};
+
+
 export function GiftList() {
   const searchParams = useSearchParams();
   const isAdmin = searchParams.get("admin") === "amor2025";
@@ -105,52 +123,59 @@ export function GiftList() {
             {gifts.map((gift) => (
               <motion.div
                 key={gift.id}
-                variants={item}
-                className={`
-                  rounded-2xl border p-6 transition
-                  ${
-                    gift.available
-                      ? "bg-background hover:shadow-lg"
-                      : "bg-soft opacity-60"
-                  }
-                `}
+                variants={item} // entrada (fade + y)
               >
-                <h3 className="font-serif text-lg mb-4">
-                  {gift.name}
-                </h3>
+                <motion.div
+                  variants={cardVariants} // estado (available / reserved)
+                  animate={gift.available ? "available" : "reserved"}
+                  initial="available"
+                  className={`
+                    rounded-2xl border p-6
+                    transition-shadow
+                    ${
+                      gift.available
+                        ? "bg-background hover:shadow-lg"
+                        : "bg-soft"
+                    }
+                  `}
+                >
+                  <h3 className="font-serif text-lg mb-4">
+                    {gift.name}
+                  </h3>
 
-                {gift.available ? (
-  <button
-    onClick={() => handleSelectGift(gift.id)}
-    className="
-      w-full rounded-full px-4 py-2
-      text-xs uppercase tracking-widest
-      border border-accent
-      text-accent
-      transition
-      hover:bg-accent hover:text-background
-    "
-  >
-    Escolher presente
-  </button>
-) : (
-  <button
-    disabled
-    className="
-      w-full rounded-full px-4 py-2
-      text-xs uppercase tracking-widest
-      border border-border
-      text-secondary
-      cursor-default
-    "
-  >
-    {isAdmin
-      ? `Reservado por ${gift.reservedBy}`
-      : "Já escolhido"}
-  </button>
-)}
-
+                  {gift.available ? (
+                    <button
+                      onClick={() => handleSelectGift(gift.id)}
+                      className="
+                        w-full rounded-full px-4 py-2
+                        text-xs uppercase tracking-widest
+                        border border-accent
+                        text-accent
+                        transition
+                        hover:bg-accent hover:text-background
+                      "
+                    >
+                      Escolher presente
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="
+                        w-full rounded-full px-4 py-2
+                        text-xs uppercase tracking-widest
+                        border border-border
+                        text-secondary
+                        cursor-default
+                      "
+                    >
+                      {isAdmin
+                        ? `Reservado por ${gift.reservedBy}`
+                        : "Já escolhido"}
+                    </button>
+                  )}
+                </motion.div>
               </motion.div>
+
             ))}
           </motion.div>
         </motion.div>
