@@ -19,7 +19,7 @@
 /* =========================
    DARK MODE
    ========================= */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0F0F0D;
     --foreground: #F3F3F0;
@@ -32,7 +32,7 @@
 
     --border: #2A2A25;
   }
-}
+} */
 
 /* =========================
    TAILWIND THEME EXPORT
