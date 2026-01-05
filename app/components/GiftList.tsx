@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { GiftConfirmModal } from "./GiftConfirmModal";
 import { Eye } from "lucide-react";
 import { AddGiftButton } from "./AddGiftButton";
+
+import { useAdminGate } from "../utils/useAdminGate";
 
 type Gift = {
   id: number;
@@ -53,8 +55,10 @@ const cardVariants: Variants = {
 
 export function GiftList() {
 
-  const searchParams = useSearchParams();
-  const isAdmin = searchParams.get("admin") === "amor2025";
+  // const searchParams = useSearchParams();
+  // const isAdmin = searchParams.get("admin") === "amor2025";
+  
+  const isAdmin = useAdminGate();
 
   const [gifts, setGifts] = useState<Gift[]>([
     { id: 1, name: "Jogo de pratos", available: true },
