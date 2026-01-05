@@ -2,12 +2,12 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { Hero } from "@/components/Hero";
-import { Message } from "@/components/Message";
-import { EventDetails } from "@/components/EventDetails";
-import { GiftList } from "@/components/GiftList";
-import { ConfirmSection } from "@/components/ConfirmSection";
-import { Footer } from "@/components/Footer";
+import { Hero } from "@/app/components/Hero";
+import { Message } from "@/app/components/Message";
+import { EventDetails } from "@/app/components/EventDetails";
+import { GiftList } from "@/app/components/GiftList";
+import { ConfirmSection } from "@/app/components/ConfirmSection";
+import { Footer } from "@/app/components/Footer";
 
 export default function Home() {
   const searchParams = useSearchParams();
