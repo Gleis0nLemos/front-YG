@@ -11,7 +11,7 @@ import { Footer } from "@/app/components/Footer";
 
 import { useAdminGate } from "./utils/useAdminGate";
 import { AdminConfirmList } from "./components/AdminConfirmList";
-import { mockConfirmations } from "./mock/mockConfirmations";
+// import { mockConfirmations } from "./mock/mockConfirmations";
 
 export default function Home() {
   // const searchParams = useSearchParams();
@@ -24,7 +24,8 @@ export default function Home() {
       <>
         <GiftList />
         <ConfirmSection />
-        <AdminConfirmList data={mockConfirmations} />
+        {/* <AdminConfirmList data={mockConfirmations} /> */}
+        <AdminConfirmList  />
         
         <Footer />
       </>

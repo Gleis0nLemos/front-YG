@@ -1,151 +1,108 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-
-function Counter({
-  label,
-  value,
-  setValue,
-  disabled,
-}: {
-  label: string;
-  value: number;
-  setValue: (v: number) => void;
-  disabled: boolean;
-}) {
-  return (
-    <div
-      className={`flex items-center justify-between rounded-full border px-4 py-3 transition
-        ${disabled ? "opacity-40 pointer-events-none" : "border-border"}
-      `}
-    >
-      <span className="text-sm text-secondary">{label}</span>
-
-      <div className="flex items-center gap-4">
-        <button
-          type="button"
-          onClick={() => setValue(Math.max(0, value - 1))}
-          className="h-8 w-8 rounded-full border text-sm hover:bg-muted"
-        >
-          −
-        </button>
-
-        <span className="w-4 text-center text-sm">{value}</span>
-
-        <button
-          type="button"
-          onClick={() => setValue(value + 1)}
-          className="h-8 w-8 rounded-full border text-sm hover:bg-muted"
-        >
-          +
-        </button>
-      </div>
-    </div>
-  );
-}
+import { motion } from "framer-motion";
+import { useConfirmations } from "@/app/context/ConfirmContext";
 
 export function ConfirmSection() {
+  const { addConfirmation } = useConfirmations();
+
   const [name, setName] = useState("");
-  const [status, setStatus] = useState<"" | "yes" | "no">("");
+  const [going, setGoing] = useState<"yes" | "no" | null>(null);
   const [adults, setAdults] = useState(1);
   const [kids, setKids] = useState(0);
+  const options = ["yes", "no"] as const;
 
-  const going = status === "yes";
-  const disabledSubmit =
-    !name ||
-    !status ||
-    (going && adults === 0 && kids === 0);
+  const disabled =
+    !name.trim() ||
+    going === null ||
+    (going === "yes" && adults + kids === 0);
 
-  function handleStatusChange(value: "yes" | "no") {
-    setStatus(value);
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
 
-    if (value === "no") {
-      setAdults(0);
-      setKids(0);
-    }
+    addConfirmation({
+      name,
+      going: going === "yes",
+      adults: going === "yes" ? adults : 0,
+      kids: going === "yes" ? kids : 0,
+    });
 
-    if (value === "yes" && adults === 0 && kids === 0) {
-      setAdults(1);
-    }
+    setName("");
+    setGoing(null);
+    setAdults(1);
+    setKids(0);
   }
 
   return (
     <section className="py-32 px-6 bg-background">
-      <div className="mx-auto max-w-xl">
-        <div className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.35em] text-secondary">
-            Confirmação de presença
-          </p>
-          <div className="mx-auto my-8 h-px w-16 bg-border opacity-60" />
+      <h2 className="text-center font-serif text-2xl mb-10">
+        Confirmar presença
+      </h2>
+
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md mx-auto space-y-6"
+      >
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Seu nome"
+          className="w-full rounded-xl border px-4 py-3 bg-transparent"
+        />
+
+        <div className="flex gap-3">
+          {options.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => setGoing(opt)}
+              className={`flex-1 rounded-full border px-4 py-2 text-xs uppercase tracking-widest
+                ${
+                  going === opt
+                    ? "bg-accent text-background"
+                    : "text-secondary"
+                }`}
+            >
+              {opt === "yes"
+                ? "Vou comparecer"
+                : "Não poderei ir"}
+            </button>
+          ))}
         </div>
 
-        <form className="rounded-2xl border border-border bg-card p-8 space-y-6">
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Seu nome"
-            className="w-full rounded-full border px-4 py-3 text-sm outline-none"
-          />
-
-          <select
-            value={status}
-            onChange={(e) =>
-              handleStatusChange(e.target.value as "yes" | "no")
-            }
-            className="w-full rounded-full border px-4 py-3 text-sm outline-none"
+        {going === "yes" && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="grid grid-cols-2 gap-4"
           >
-            <option value="">Você poderá comparecer?</option>
-            <option value="yes">Vou comparecer 💛</option>
-            <option value="no">Não poderei ir</option>
-          </select>
+            <input
+              type="number"
+              min={0}
+              value={adults}
+              onChange={(e) => setAdults(+e.target.value)}
+              className="rounded-xl border px-4 py-3"
+              placeholder="Adultos"
+            />
+            <input
+              type="number"
+              min={0}
+              value={kids}
+              onChange={(e) => setKids(+e.target.value)}
+              className="rounded-xl border px-4 py-3"
+              placeholder="Crianças"
+            />
+          </motion.div>
+        )}
 
-          {/* Contadores animados */}
-          <AnimatePresence>
-            {going && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 12 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="space-y-3"
-              >
-                <Counter
-                  label="Adultos"
-                  value={adults}
-                  setValue={setAdults}
-                  disabled={!going}
-                />
-                <Counter
-                  label="Crianças"
-                  value={kids}
-                  setValue={setKids}
-                  disabled={!going}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <textarea
-            placeholder="Mensagem (opcional)"
-            className="w-full rounded-2xl border px-4 py-3 text-sm resize-none"
-            rows={4}
-          />
-
-          <button
-            disabled={disabledSubmit}
-            className={`w-full rounded-full px-4 py-3 text-xs uppercase tracking-widest transition
-              ${
-                disabledSubmit
-                  ? "opacity-40 pointer-events-none"
-                  : "border border-accent text-accent hover:bg-accent hover:text-background"
-              }
-            `}
-          >
-            Confirmar presença
-          </button>
-        </form>
-      </div>
+        <button
+          disabled={disabled}
+          className="w-full rounded-full bg-black text-white py-3 disabled:opacity-30"
+        >
+          Confirmar presença
+        </button>
+      </form>
     </section>
   );
 }
