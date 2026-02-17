@@ -17,7 +17,14 @@ export default function Home() {
   // const searchParams = useSearchParams();
   // const isAdmin = searchParams.get("admin") === "amor2025";
 
-  const isAdmin = useAdminGate();
+    
+  const { isAdmin, mounted } = useAdminGate();
+
+  if (!mounted) {
+  return <div className="min-h-screen" />;
+  }
+
+
   /* 🔐 VISÃO ADMIN */
   if (isAdmin) {
     return (

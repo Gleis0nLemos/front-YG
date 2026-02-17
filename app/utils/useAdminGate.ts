@@ -1,24 +1,26 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useAdminGate() {
   const searchParams = useSearchParams();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const [isAdmin] = useState(() => {
-    if (typeof window === "undefined") return false;
+  useEffect(() => {
+    setMounted(true);
 
     const param = searchParams.get("admin");
-    const stored = localStorage.getItem("isAdmin");
 
     if (param === "amor2025") {
       localStorage.setItem("isAdmin", "true");
-      return true;
+      setIsAdmin(true);
+      return;
     }
 
-    return stored === "true";
-  });
+    setIsAdmin(localStorage.getItem("isAdmin") === "true");
+  }, [searchParams]);
 
-  return isAdmin;
+  return { isAdmin, mounted };
 }

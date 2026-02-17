@@ -9,9 +9,13 @@ import { AddGiftButton } from "./AddGiftButton";
 
 import { useAdminGate } from "../utils/useAdminGate";
 
+import Image from "next/image";
+
 type Gift = {
   id: number;
   name: string;
+  link?: string;
+  image?: string;
   available: boolean;
   reservedBy?: string;
 };
@@ -94,16 +98,22 @@ export function GiftList() {
     setTimeout(() => setToast(false), 3000);
   }
   
-  function handleAddGift(name: string) {
-    setGifts((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        name,
-        available: true,
-      },
-    ]);
-  }
+function handleAddGift(data: {
+  name: string;
+  link: string;
+  image: string;
+}) {
+  setGifts((prev) => [
+    ...prev,
+    {
+      id: Date.now(),
+      name: data.name,
+      link: data.link || undefined,
+      image: data.image || undefined,
+      available: true,
+    },
+  ]);
+}
 
 
   const currentGift = gifts.find((g) => g.id === selectedGiftId);
@@ -143,7 +153,7 @@ export function GiftList() {
           {/* Grid */}
           <motion.div
             variants={container}
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-3 md:grid-cols-2 lg:grid-cols-4"
           >
             {gifts.map((gift) => (
               <motion.div
@@ -158,7 +168,7 @@ export function GiftList() {
                   initial="available"
                   className={`
                     relative
-                    rounded-2xl border p-6
+                    rounded-2xl border p-4
                     transition-shadow
                     ${
                       gift.available
@@ -203,8 +213,47 @@ export function GiftList() {
                     )}
                   </AnimatePresence>
                   <h3 className="font-serif text-lg mb-4">
-                    {gift.name}
-                  </h3>
+  {gift.name}
+</h3>
+
+{gift.image && (
+  <div
+    className="
+      mb-4
+      w-full /*max-h-52 object-contain mx-auto*/
+      aspect-square              /* 🔥 todas imagens quadradas */
+      bg-white                   /* fundo limpo estilo loja */
+      rounded-xl
+      border border-border
+      flex items-center justify-center
+      overflow-hidden
+      p-3
+    "
+  >
+    <Image
+      src={gift.image}
+      alt={gift.name}
+      width={300}
+      height={300}
+      className="object-contain w-full h-full"
+      sizes="(max-width: 768px) 100vw, 33vw"
+    />
+  </div>
+)}
+
+{gift.link && (
+  <a
+    href={gift.link}
+    target="_blank"
+    className="
+      text-xs text-accent underline
+      block mb-4
+    "
+  >
+    Ver modelo escolhido
+  </a>
+)}
+
 
                   {gift.available ? (
                     <button

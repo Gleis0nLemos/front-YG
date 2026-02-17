@@ -4,18 +4,33 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
-  onAdd: (name: string) => void;
+  onAdd: (data: {
+    name: string;
+    link: string;
+    image: string;
+  }) => void;
 };
 
 export function AddGiftButton({ onAdd }: Props) {
   const [open, setOpen] = useState(false);
+
   const [name, setName] = useState("");
+  const [link, setLink] = useState("");
+  const [image, setImage] = useState("");
 
   function handleSubmit() {
     if (!name.trim()) return;
 
-    onAdd(name.trim());
+    onAdd({
+      name: name.trim(),
+      link: link.trim(),
+      image: image.trim(),
+    });
+
     setName("");
+    setLink("");
+    setImage("");
+
     setOpen(false);
   }
 
@@ -54,9 +69,9 @@ export function AddGiftButton({ onAdd }: Props) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full max-w-sm rounded-2xl bg-background p-6 shadow-xl"
+              className="w-full max-w-sm rounded-2xl bg-background p-6 shadow-xl space-y-4"
             >
-              <h3 className="mb-4 text-center font-serif text-lg">
+              <h3 className="text-center font-serif text-lg">
                 Novo presente
               </h3>
 
@@ -71,7 +86,40 @@ export function AddGiftButton({ onAdd }: Props) {
                 "
               />
 
-              <div className="mt-6 flex gap-3">
+              <input
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                placeholder="Link do modelo (opcional)"
+                className="
+                  w-full rounded-lg border px-4 py-2
+                  text-sm outline-none
+                  focus:ring-1 focus:ring-accent
+                "
+              />
+
+              <input
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                placeholder="URL da foto (opcional)"
+                className="
+                  w-full rounded-lg border px-4 py-2
+                  text-sm outline-none
+                  focus:ring-1 focus:ring-accent
+                "
+              />
+
+              {/* Preview da imagem */}
+              {image && (
+                <div className="pt-2">
+                  <img
+                    src={image}
+                    alt="Preview"
+                    className="rounded-lg w-full h-32 object-cover border"
+                  />
+                </div>
+              )}
+
+              <div className="pt-4 flex gap-3">
                 <button
                   onClick={() => setOpen(false)}
                   className="
