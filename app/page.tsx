@@ -18,11 +18,11 @@ export default function Home() {
   // const isAdmin = searchParams.get("admin") === "amor2025";
 
     
-  const { isAdmin, mounted } = useAdminGate();
+  const { isAdmin } = useAdminGate();
 
-  if (!mounted) {
-  return <div className="min-h-screen" />;
-  }
+  // if (!mounted) {
+  // return <div className="min-h-screen" />;
+  // }
 
 
   /* 🔐 VISÃO ADMIN */
