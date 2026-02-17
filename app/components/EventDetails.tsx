@@ -49,7 +49,7 @@ export function EventDetails() {
           variants={item}
           className="font-serif text-3xl md:text-4xl leading-none"
         >
-          10 de Maio
+          25 de Abril
         </motion.p>
 
         <motion.p
@@ -63,13 +63,13 @@ export function EventDetails() {
           variants={item}
           className="mt-6 text-secondary leading-relaxed"
         >
-          Rua Exemplo, 123 <br />
-          Centro
+          <span className="text-2xl">Vila Clemente</span> <br/>
+          Espaço de Eventos
         </motion.p>
 
         <motion.a
           variants={item}
-          href="https://www.google.com/maps"
+          href="https://maps.app.goo.gl/i5onZK6MesYPGJFs7"
           target="_blank"
           rel="noopener noreferrer"
           className="

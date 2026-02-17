@@ -55,7 +55,7 @@ export function Hero() {
           variants={item}
           className="mt-6 text-4xl md:text-6xl font-serif"
         >
-          Chá de Cozinha
+          Casamento
         </motion.h1>
 
         <motion.p
@@ -71,8 +71,8 @@ export function Hero() {
         />
 
         <motion.div variants={item} className="space-y-1 text-secondary">
-          <p>28 de Fevereiro • 16h</p>
-          <p>Rua Exemplo, 123 — Centro</p>
+          <p>25 de Abril • 16h</p>
+          <p>R. Sebastião de Castro e Silva, 263 - Banguê 1 - Pacajus, CE, 62870-000</p>
         </motion.div>
 
         <motion.div variants={item}>
