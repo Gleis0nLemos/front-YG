@@ -62,7 +62,7 @@ export function GiftList() {
   // const searchParams = useSearchParams();
   // const isAdmin = searchParams.get("admin") === "amor2025";
   
-  const isAdmin = useAdminGate();
+  const { isAdmin } = useAdminGate();
 
   const [gifts, setGifts] = useState<Gift[]>([
     { id: 1, name: "Jogo de pratos", available: true },
