@@ -7,10 +7,12 @@ import { exportCSV } from "@/app/utils/exportCsv";
 
 function exitAdminMode() {
   const url = new URL(window.location.href);
+
+  localStorage.removeItem("isAdmin"); // ← ESSENCIAL
+
   url.searchParams.delete("admin");
   window.location.href = url.toString();
 }
-
 export function AdminConfirmList() {
   const {
     confirmations,
