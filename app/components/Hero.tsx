@@ -3,6 +3,12 @@
 import { motion, type Variants } from "framer-motion";
 import dynamic from "next/dynamic";
 import { HeroGallery } from "./HeroGallery";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 const Countdown = dynamic(
   () => import("./Countdown").then((mod) => mod.Countdown),
@@ -66,22 +72,36 @@ export function Hero() {
 
             <motion.h1
               variants={item}
-              className="mt-6 text-4xl md:text-6xl font-serif"
+              className="mt-2 text-4xl md:text-6xl font-serif"
             >
               Casamento
             </motion.h1>
 
-            <motion.p
-              variants={item}
-              className="mt-6 text-lg md:text-xl text-secondary"
-            >
-              Gleison <span className="mx-2">&</span> Yasmim
-            </motion.p>
+<motion.p
+  variants={item}
+  className={`
+    ${greatVibes.className}
+    mt-6
+    text-4xl md:text-5xl
+    leading-none
+    text-neutral-700
+  `}
+>
+  Gleison <span className="mx-4">&</span> Yasmim
+</motion.p>
 
             <motion.div
-              variants={item}
-              className="mx-auto my-8 h-px w-20 bg-border"
-            />
+  variants={item}
+  className="flex items-center justify-center my-10"
+>
+  <div className="h-px w-28 md:w-36 bg-border" />
+
+  <span className="mx-4 text-[18px] text-[#6B7D5C]">
+    ♥
+  </span>
+
+  <div className="h-px w-28 md:w-36 bg-border" />
+</motion.div>
 
             <motion.div variants={item} className="space-y-1 text-secondary">
               <p>25 de Abril • 16h</p>
