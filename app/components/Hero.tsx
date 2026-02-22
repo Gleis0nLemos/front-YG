@@ -38,9 +38,9 @@ const item: Variants = {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <section className="relative min-h-screen overflow-hidden bg-background text-foreground mt-40 md:pt-0">
       
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-soft" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-soft " />
 
       {/* 🔥 Layout responsivo */}
 <div className="

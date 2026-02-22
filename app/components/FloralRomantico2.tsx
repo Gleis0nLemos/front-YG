@@ -95,14 +95,18 @@ export function FloralRomantico() {
 
   if (shouldReduceMotion) {
     return (
-      <div className="flex justify-center items-center my-16 md:my-24">
+      <div className="flex justify-center items-center">
         <svg
-          width="360"
-          height="360"
           viewBox="0 0 340 340"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-72 h-72 md:w-96 md:h-96 text-accent drop-shadow-xl"
+          className="
+            w-36 h-36               // mobile pequeno ~144px
+            sm:w-44 sm:h-44         // ~176px
+            md:w-52 md:h-52         // ~208px
+            text-accent drop-shadow-xl
+            max-w-[14rem]           // trava pra não crescer demais
+          "
         >
           <circle
             cx={centerX}
@@ -126,12 +130,17 @@ export function FloralRomantico() {
     <LazyMotion features={domAnimation}>
       <div className="flex justify-center items-center">
         <svg
-          width="380"
-          height="380"
           viewBox="0 0 340 340"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-80 h-80 md:w-[26rem] md:h-[26rem] text-accent drop-shadow-2xl"
+          className="
+            w-40 h-40               // mobile ~160px
+            sm:w-48 sm:h-48         // ~192px
+            md:w-56 md:h-56         // ~224px – tamanho bom pro footer
+            lg:w-64 lg:h-64         // ~256px se tela muito larga
+            text-foreground drop-shadow-2xl
+            max-w-[16rem]           // limite superior forte
+          "
         >
           {/* Aro principal com pulsar leve */}
           <m.circle
@@ -167,69 +176,62 @@ export function FloralRomantico() {
             transition={{ duration: 5.5, delay: 1.5, ease: "easeOut" }}
           />
 
-          {/* Centro exato como na referência: Y & G com linhas diagonais e folhas nos cantos */}
-          {/* Centro clean: Y & G ainda menores, & bem menor que as iniciais */}
-<m.g
-  initial={{ opacity: 0, scale: 0.7 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{
-    duration: 3.2,
-    delay: 2.0,
-    type: "spring",
-    stiffness: 120,
-    damping: 14,
-  }}
->
-  <g transform={`translate(${centerX}, ${centerY})`}>
-    {/* Y à esquerda – menor ainda */}
-    <text
-      x="-32"
-      y="12"
-      textAnchor="middle"
-      fontFamily="Georgia, serif"
-      fontSize="54"
-      fontWeight="bold"
-      fill="currentColor"
-      opacity={0.94}
-    >
-      Y
-    </text>
+          {/* Centro Y & G */}
+          <m.g
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 3.2,
+              delay: 2.0,
+              type: "spring",
+              stiffness: 120,
+              damping: 14,
+            }}
+          >
+            <g transform={`translate(${centerX}, ${centerY})`}>
+              <text
+                x="-32"
+                y="12"
+                textAnchor="middle"
+                fontFamily="Georgia, serif"
+                fontSize="54"
+                fontWeight="bold"
+                fill="currentColor"
+                opacity={0.94}
+              >
+                Y
+              </text>
+              <text
+                x="0"
+                y="18"
+                textAnchor="middle"
+                fontFamily="Georgia, serif"
+                fontSize="38"
+                fontWeight="400"
+                fill="currentColor"
+                opacity={0.88}
+              >
+                &
+              </text>
+              <text
+                x="32"
+                y="12"
+                textAnchor="middle"
+                fontFamily="Georgia, serif"
+                fontSize="54"
+                fontWeight="bold"
+                fill="currentColor"
+                opacity={0.94}
+              >
+                G
+              </text>
+            </g>
+          </m.g>
 
-    {/* & central – bem menor que Y e G */}
-    <text
-      x="0"
-      y="18"
-      textAnchor="middle"
-      fontFamily="Georgia, serif"
-      fontSize="38"
-      fontWeight="400"
-      fill="currentColor"
-      opacity={0.88}
-    >
-      &
-    </text>
-
-    {/* G à direita – menor ainda */}
-    <text
-      x="32"
-      y="12"
-      textAnchor="middle"
-      fontFamily="Georgia, serif"
-      fontSize="54"
-      fontWeight="bold"
-      fill="currentColor"
-      opacity={0.94}
-    >
-      G
-    </text>
-  </g>
-</m.g>
-
-          {/* Flores principais - mantidas iguais */}
+          {/* Flores principais */}
           {flowerPositions.map((pos, i) => {
             const { x, y } = getPosition(pos.angle);
             const rotOffset = pos.petalRotationOffset;
-
             return (
               <m.g
                 key={i}
@@ -248,7 +250,6 @@ export function FloralRomantico() {
                 }}
               >
                 <circle cx={x} cy={y} r={6.5 + (i % 4)} fill="currentColor" />
-
                 {[-75, -45, -15, 15, 45, 75, 105, 135].map((rot, j) => (
                   <m.ellipse
                     key={`type1-${j}`}
@@ -261,7 +262,6 @@ export function FloralRomantico() {
                     transform={`rotate(${rot + pos.angle * 0.35 + rotOffset} ${x} ${y}) translate(0, -12)`}
                   />
                 ))}
-
                 {[-60, -30, 0, 30, 60, 90].map((rot, j) => (
                   <m.path
                     key={`type2-${j}`}
@@ -271,7 +271,6 @@ export function FloralRomantico() {
                     transform={`translate(${x},${y}) rotate(${rot + pos.angle * 0.5 + rotOffset + 180}) scale(1.1)`}
                   />
                 ))}
-
                 {[-90, -50, 10, 50, 100].map((rot, j) => (
                   <m.ellipse
                     key={`type3-${j}`}
@@ -284,7 +283,6 @@ export function FloralRomantico() {
                     transform={`rotate(${rot + pos.angle * 0.4 + rotOffset + 30} ${x} ${y}) translate(0, -10) skewX(15)`}
                   />
                 ))}
-
                 <m.circle cx={x} cy={y} r={3.8} fill="currentColor" opacity={0.65} />
               </m.g>
             );

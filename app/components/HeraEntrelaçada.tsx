@@ -82,7 +82,7 @@ export function HeraEntrelaçada() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center my-16 md:my-24">
+    <div className="flex justify-center items-center ">
       <svg
         width="360"
         height="360"

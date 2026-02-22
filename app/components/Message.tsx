@@ -37,7 +37,7 @@ export function Message() {
           {/* Floral sempre centralizado horizontalmente */}
           <motion.div
             variants={fade}
-            className="mb-10 lg:mb-0 flex justify-center w-full lg:w-auto lg:flex-1"
+            className="mb-10 my-16 md:my-24 lg:mb-0 flex justify-center w-full lg:w-auto lg:flex-1"
           >
             <FloralRomantico />
           </motion.div>
