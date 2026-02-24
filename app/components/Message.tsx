@@ -25,9 +25,9 @@ const fade: Variants = {
 
 export function Message() {
   return (
-    <section className="pl-6 py-12 lg:py-24 bg-background flex items-center justify-center">
+    <section className="py-12 lg:py-24 bg-background flex items-center justify-right">
       <motion.div
-        className="mx-auto w-full max-w-5xl"
+        className="mx-auto w-full"
         variants={container}
         initial="hidden"
         animate="visible"
@@ -37,7 +37,7 @@ export function Message() {
           {/* Floral sempre centralizado horizontalmente */}
           <motion.div
             variants={fade}
-            className="mb-10 my-16 md:my-24 lg:mb-0 flex justify-center w-full lg:w-auto lg:flex-1"
+            className="mb-10 my-16 lg:pl-32 md:my-24 lg:mb-0 flex justify-center w-full lg:w-auto lg:flex-1"
           >
             <FloralRomantico />
           </motion.div>

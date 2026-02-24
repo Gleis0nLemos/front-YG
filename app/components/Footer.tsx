@@ -8,7 +8,7 @@ import { FloralRomantico } from "./FloralRomantico2";
 export function Footer() {
   return (
     <footer className="py-10 px-6 bg-zinc-950 from-background to-gray-950/50 text-gray-400 text-sm border-t border-gray-800/50">
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between md:items-center">
+      <div className="max-w-6xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between md:items-center">
         
         {/* Esquerda: Copyright + corações */}
 

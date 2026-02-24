@@ -45,7 +45,7 @@ export function ConfirmSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 px-5 sm:px-8 bg-background">
+    <section className="py-16 md:py-24 md:mt-24 px-5 sm:px-8 bg-background">
       <div className="max-w-lg mx-auto">
         {/* Título com a flor ao lado ou acima */}
         <div className="flex items-center justify-center mb-6 flex-wrap">
@@ -111,6 +111,9 @@ export function ConfirmSection() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden pt-3"
               >
+                <p className="text-sm text-accent mb-4 font-semibold tracking-tight">
+                  Quantas pessoas vão comparecer com você?
+                </p>
                 <div className="grid grid-cols-2 gap-x-6">
                   {(["adults", "kids"] as const).map((type) => {
                     const label = type === "adults" ? "Adultos" : "Crianças";

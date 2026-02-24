@@ -126,12 +126,12 @@ export function FloralRomantico() {
     <LazyMotion features={domAnimation}>
       <div className="flex justify-center items-center">
         <svg
-          width="380"
+          width="360"
           height="380"
           viewBox="0 0 340 340"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-80 h-80 md:w-[26rem] md:h-[26rem] text-accent drop-shadow-2xl"
+          className="w-80 h-80 lg:w-[23rem] lg:h-[23rem] text-accent drop-shadow-2xl"
         >
           {/* Aro principal com pulsar leve */}
           <m.circle

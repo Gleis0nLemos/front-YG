@@ -35,6 +35,10 @@ export function GiftList() {
     { id: 1, name: "Jogo de pratos", available: true },
     { id: 2, name: "Liquidificador", available: false, reservedBy: "Maria" },
     { id: 3, name: "Conjunto de copos", available: true },
+    { id: 4, name: "Cadeira", available: true },
+    { id: 5, name: "Cadeira", available: true },
+    { id: 6, name: "Cadeira", available: true },
+    { id: 7, name: "Cadeira", available: true },
   ]);
 
   const [selectedGiftId, setSelectedGiftId] = useState<number | null>(null);
@@ -66,8 +70,8 @@ export function GiftList() {
 
   return (
     <>
-      <section id="presentes" className="py-20 lg:py-2 px-6 bg-background text-foreground">
-        <motion.div className="mx-auto max-w-4xl" variants={container} initial="hidden" animate="visible">
+      <section id="presentes" className="py-20 lg:py-2 px-2 md:px-8 lg:px-4 xl:px-2 bg-background text-foreground">
+        <motion.div className="mx-auto max-w-7xl" variants={container} initial="hidden" animate="visible">
           {/* Header compacto */}
           <motion.div variants={item} className="text-center mb-2">
             <h2 className="text-xs uppercase tracking-[0.4em] pb-4 text-secondary/80">
@@ -93,7 +97,7 @@ export function GiftList() {
             </motion.div>
           )}
 
-          <motion.div variants={container} className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <motion.div variants={container} className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {gifts.map((gift) => (
               <motion.div key={gift.id} variants={item}>
                 <motion.div

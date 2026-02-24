@@ -11,6 +11,7 @@ import { Footer } from "@/app/components/Footer";
 
 import { useAdminGate } from "./utils/useAdminGate";
 import { AdminConfirmList } from "./components/AdminConfirmList";
+import { MessageAndEvent } from "./components/MessageAndEvent";
 // import { mockConfirmations } from "./mock/mockConfirmations";
 
 export default function Home() {
@@ -43,28 +44,30 @@ export default function Home() {
   return (
     <>
       <Hero />
-<section className="bg-background min-h-screen">
-  <div
-    className="
-      grid
-      lg:grid-cols-[68%_32%]     // um pouco mais equilibrado
-      grid-cols-1
-      gap-6 lg:gap-x-6 lg:gap-y-0 // gap-x médio em lg
-      items-start
-    "
-  >
-    <div className="bg-muted/40">
-      <Message /> {/* com lg:pr-2 ou lg:pr-4 no section interno */}
-    </div>
-
-    <div className="bg-muted/20">
-      <EventDetails /> {/* com lg:pl-2 lg:pr-40 no section interno */}
-    </div>
-  </div>
-</section>
+      <MessageAndEvent />
       <GiftList />
       <ConfirmSection />
       <Footer />
     </>
   );
 }
+
+
+{/* <section className="bg-background min-h-screen px-4 md:px-6 lg:px-8">
+  <div
+    className="
+      grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6
+      items-start
+    "
+  >
+//     {/* Message ocupa mais espaço */}
+//     <div className="lg:col-span-3 xl:col-span-4">
+//       <Message /> {/* pode colocar lg:pr-4 ou lg:pr-6 aqui se precisar */}
+//     </div>
+
+//     {/* EventDetails ocupa menos */}
+//     <div className="lg:col-span-1 xl:col-span-2">
+//       <EventDetails /> {/* pode colocar lg:pl-4 ou lg:pl-6 aqui */}
+//     </div>
+//   </div>
+// // </section> */}

@@ -26,7 +26,7 @@ const item: Variants = {
 
 export function EventDetails() {
   return (
-    <section className="py-16 px-6 md:py-32 lg:py-40 xl:pr-80 text-foreground bg-background">
+    <section className="py-16 px-6 md:py-32 lg:py-40 xl:pr-55 text-foreground bg-background">
       <motion.div
         className="mx-auto max-w-md text-center"
         variants={container}
