@@ -103,6 +103,7 @@ export function MessageAndEvent() {
 
           {/* Detalhes do Evento – em lg ocupa toda a linha (col-span-2), em xl volta para 4/12 */}
           <motion.div
+            id="localizacao" 
             variants={container}
             initial="hidden"
             whileInView="visible"

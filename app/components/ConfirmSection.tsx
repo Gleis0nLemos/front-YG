@@ -45,7 +45,7 @@ export function ConfirmSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 md:mt-24 px-5 sm:px-8 bg-background">
+    <section id="confirmacao" className="py-16 md:py-24 md:mt-24 px-5 sm:px-8 bg-background">
       <div className="max-w-lg mx-auto">
         {/* Título com a flor ao lado ou acima */}
         <div className="flex items-center justify-center mb-6 flex-wrap">
@@ -114,7 +114,7 @@ export function ConfirmSection() {
                 <p className="text-sm text-accent mb-4 font-semibold tracking-tight">
                   Quantas pessoas vão comparecer com você?
                 </p>
-                <div className="grid grid-cols-2 gap-x-6">
+                <div className="grid grid-cols-2 md:gap-x-6">
                   {(["adults", "kids"] as const).map((type) => {
                     const label = type === "adults" ? "Adultos" : "Crianças";
                     const value = type === "adults" ? adults : kids;
@@ -122,13 +122,13 @@ export function ConfirmSection() {
                     return (
                       <div
                         key={type}
-                        className="flex items-center justify-between gap-3"
+                        className="flex items-center justify-between gap-2"
                       >
                         <span className="text-sm font-medium text-gray-700">
                           {label}
                         </span>
 
-                        <div className="flex justify-center items-center gap-1">
+                        <div className="flex justify-center items-center gap-0">
                           <button
                             type="button"
                             onClick={() => adjust(type, -1)}

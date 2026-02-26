@@ -70,7 +70,7 @@ export function GiftList() {
 
   return (
     <>
-      <section id="presentes" className="py-20 lg:py-2 px-2 md:px-8 lg:px-4 xl:px-2 bg-background text-foreground">
+      <section id="presentes" className="py-20 lg:pb-2 lg:pt-12 px-2 md:px-8 lg:px-4 xl:px-2 bg-background text-foreground">
         <motion.div className="mx-auto max-w-7xl" variants={container} initial="hidden" animate="visible">
           {/* Header compacto */}
           <motion.div variants={item} className="text-center mb-2">
