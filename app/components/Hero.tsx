@@ -5,7 +5,7 @@ import { motion, type Variants } from "framer-motion";
 import dynamic from "next/dynamic";
 import { HeroGallery } from "./HeroGallery";
 import { Great_Vibes } from "next/font/google";
-import { MapPin, Gift, CheckCircle2 } from "lucide-react";
+import { MapPin, Gift, CheckCircle2, DollarSign } from "lucide-react";
 
 const greatVibes = Great_Vibes({
   weight: "400",
@@ -124,14 +124,16 @@ export function Hero() {
               {/* Botões de ação */}
               <motion.div
                 variants={item}
-                className="grid grid-cols-3 gap-3 sm:gap-4 max-w-sm sm:max-w-md mx-auto"
+                className="grid grid-cols-4 gap-3 sm:gap-4 max-w-sm sm:max-w-md mx-auto"
               >
                 {[
                   { icon: MapPin, label: "Localização", href: "#localizacao" },
-                  { icon: Gift, label: "Lista de presentes", href: "#presentes" },
                   { icon: CheckCircle2, label: "Confirmar presença", href: "#confirmacao" },
+                  { icon: DollarSign, label: "PIX", href: "#pix" },
+                  { icon: Gift, label: "Lista de presentes", href: "#presentes" },
+
                 ].map((btn, idx) => (
-                  <div key={idx} className="flex flex-col items-center gap-1 sm:gap-2">
+                  <div key={idx} className="flex flex-col items-center gap-1 sm:gap-2 pb-2">
                     <a
                       href={btn.href}
                       className="
@@ -155,9 +157,12 @@ export function Hero() {
                     >
                       {btn.label}
                     </span>
+
+                    
                   </div>
                 ))}
               </motion.div>
+              <span className="text-xs text-gray-500">*interaja com os botãos acima para navegar</span>
             </motion.div>
           </div>
 

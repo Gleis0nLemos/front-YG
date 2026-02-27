@@ -45,7 +45,7 @@ export function ConfirmSection() {
   };
 
   return (
-    <section id="confirmacao" className="py-16 md:py-24 md:mt-24 px-5 sm:px-8 bg-background">
+    <section id="confirmacao" className="py-16 md:py-24 md:mt-24 px-5 sm:px-8  bg-linear-180 from-background via-background/10 to-soft">
       <div className="max-w-lg mx-auto">
         {/* Título com a flor ao lado ou acima */}
         <div className="flex items-center justify-center mb-6 flex-wrap">
@@ -169,8 +169,8 @@ export function ConfirmSection() {
             disabled={!canSubmit}
             className={`w-full py-3.5 rounded-lg font-medium transition mt-4 ${
               canSubmit
-                ? "bg-black text-white hover:bg-gray-900 active:scale-[0.98]"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                ? "bg-zinc-950 text-white hover:bg-zinc-950 active:scale-[0.98]"
+                : "bg-accent/40 text-white cursor-not-allowed"
             }`}
           >
             Confirmar
