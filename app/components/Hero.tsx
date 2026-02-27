@@ -44,86 +44,111 @@ export function Hero() {
             grid grid-cols-1 lg:grid-cols-2 
             gap-0 lg:gap-10 xl:gap-16 
             items-center 
+            pb-12 xl:pb-0
             min-h-[80vh] lg:min-h-screen
-            py-12 lg:py-0
             -mx-5 sm:-mx-6 lg:mx-0
-            bg-white lg:bg-transparent
-            rounded-3xl lg:rounded-none
             shadow-2xl lg:shadow-none
             overflow-hidden lg:overflow-visible
           "
         >
           {/* Coluna de texto */}
-          <div className="flex justify-center lg:justify-end order-2 lg:order-1 px-5 sm:px-6 lg:px-0">
+          <div className="flex justify-center order-2 lg:order-1 px-5 sm:px-6 lg:px-0">
             <motion.div
-              className="w-full max-w-xl text-center lg:text-left"
+              className="w-full max-w-xl text-center"
               variants={container}
               initial="hidden"
               animate="visible"
             >
               <motion.p
                 variants={item}
-                className="text-sm uppercase tracking-[0.35em] text-secondary font-medium"
+                className="text-xs text-secondary font-medium mt-16 lg:mt-0 tracking-wider"
               >
-                Você está convidado(a)
+                &quot;O AMOR SÓ É LINDO QUANDO ENCONTRAMOS<br/>
+                ALGUÉM QUE NOS TRANSFORME NO MELHOR<br/>
+                QUE PODEMOS SER.&quot;
+              </motion.p>
+
+              <motion.p
+                variants={item}
+                className="text-xs text-secondary italic mb-6"
+              >
+                (Mário Quintana)
+              </motion.p>
+
+              {/* <motion.p
+                variants={item}
+                className="text-base text-secondary font-sans font-medium mb-1"
+              >
+                Juntamente com seus pais
+              </motion.p> */}
+
+              <motion.p
+                variants={item}
+                className={`${greatVibes.className} text-5xl sm:text-7xl text-foreground leading-tight mb-6`}
+              >
+                Yasmim <span className="mx-1">e</span> Gleison
+              </motion.p>
+
+              <motion.p
+                variants={item}
+                className="text-base font-sans font-semibold text-secondary mb-0"
+              >
+                Convidam para a cerimônia de seu
               </motion.p>
 
               <motion.h1
                 variants={item}
-                className="mt-3 text-5xl sm:text-6xl lg:text-7xl font-serif font-light"
+                className="text-base font-sans font-semibold text-secondary mb-8"
               >
-                Casamento
+                casamento a ser realizada em
               </motion.h1>
 
               <motion.p
                 variants={item}
-                className={`${greatVibes.className} mt-5 text-5xl sm:text-6xl text-neutral-700 leading-tight`}
+                className="text-2xl text-foreground font-medium tracking-wide font-serif"
               >
-                Gleison <span className="mx-5">&</span> Yasmim
+                25 de Abril de 2026
               </motion.p>
 
-              <motion.div variants={item} className="flex items-center justify-center lg:justify-start my-10">
-                <div className="h-px w-24 sm:w-32 bg-border flex-1 max-w-[140px]" />
-                <span className="mx-5 text-2xl text-[#6B7D5C]">♥</span>
-                <div className="h-px w-24 sm:w-32 bg-border flex-1 max-w-[140px]" />
-              </motion.div>
+              <motion.p
+                variants={item}
+                className="text-xl text-foreground font-medium tracking-wide font-serif mb-4"
+              >
+                Sábado, às 16:00
+              </motion.p>
 
-              <motion.div variants={item} className="text-secondary text-lg sm:text-xl mb-8">
-                <p>25 de Abril • 16h</p>
-              </motion.div>
-
-              <motion.div variants={item} className="mb-10">
+              <motion.div variants={item} className="flex justify-center mb-10">
                 <Countdown />
               </motion.div>
 
               {/* Botões de ação */}
               <motion.div
                 variants={item}
-                className="grid grid-cols-3 gap-4 sm:gap-6 max-w-sm sm:max-w-md mx-auto lg:mx-0"
+                className="grid grid-cols-3 gap-3 sm:gap-4 max-w-sm sm:max-w-md mx-auto"
               >
                 {[
                   { icon: MapPin, label: "Localização", href: "#localizacao" },
                   { icon: Gift, label: "Lista de presentes", href: "#presentes" },
                   { icon: CheckCircle2, label: "Confirmar presença", href: "#confirmacao" },
                 ].map((btn, idx) => (
-                  <div key={idx} className="flex flex-col items-center gap-2 sm:gap-3">
+                  <div key={idx} className="flex flex-col items-center gap-1 sm:gap-2">
                     <a
                       href={btn.href}
                       className="
                         group flex items-center justify-center
                         rounded-full border-2 border-accent/60
-                        h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20
+                        h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16
                         text-accent hover:text-white
                         hover:bg-accent hover:border-accent
                         transition-all duration-300
                         shadow-sm hover:shadow-xl hover:scale-105
                       "
                     >
-                      <btn.icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
+                      <btn.icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" />
                     </a>
                     <span
                       className="
-                        text-xs sm:text-sm uppercase tracking-wider
+                        text-xs uppercase tracking-wider
                         text-secondary/90 font-medium text-center
                         leading-tight
                       "

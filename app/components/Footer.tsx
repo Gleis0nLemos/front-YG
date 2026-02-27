@@ -7,8 +7,8 @@ import { FloralRomantico } from "./FloralRomantico2";
 
 export function Footer() {
   return (
-    <footer className="py-10 px-6 bg-zinc-950 from-background to-gray-950/50 text-gray-400 text-sm border-t border-gray-800/50">
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between md:items-center">
+    <footer className="py-10 bg-zinc-950 from-background to-gray-950/50 text-gray-400 text-sm border-t border-gray-800/50">
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between md:items-center">
         
         {/* Esquerda: Copyright + corações */}
 
@@ -34,7 +34,7 @@ export function Footer() {
               alt="QR Code PIX - Gleison & Yasmim"
               width={200}
               height={200}
-              className="rounded-md"
+              className=""
             />
           </div>
 

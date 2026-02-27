@@ -19,7 +19,7 @@ function ColorPalette() {
     { label: "Preto",  hex: "#000000" },
     { label: "Inox",   hex: "#d1d5db" },
     { label: "Bambu",  hex: "#d4a373" },
-    { label: "Azul Suave", hex: "#6b9ac9" }
+    { label: "Azul", hex: "#6b9ac9" }
   ];
 
   return (

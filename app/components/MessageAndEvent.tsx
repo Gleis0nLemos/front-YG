@@ -64,7 +64,7 @@ export function MessageAndEvent() {
               mx-auto w-full
             "
           >
-            <div className="space-y-3 md:space-y-8 text-base sm:text-lg md:text-xl leading-normal md:leading-relaxed font-serif">
+            <div className="space-y-3 md:space-y-8 text-base lg:text-xl leading-normal md:leading-relaxed font-serif">
               <p>
                 Com alegria no coração e a certeza
                 <br className="hidden md:inline" />
@@ -95,7 +95,7 @@ export function MessageAndEvent() {
                 que é o elo perfeito.”
               </p>
 
-              <p className="text-sm md:text-base lg:text-lg text-secondary font-medium mt-4">
+              <p className="text-sm md:text-base lg:text-lg text-secondary font-medium xl:mt-4">
                 Colossenses 3:14
               </p>
             </div>
@@ -128,12 +128,12 @@ export function MessageAndEvent() {
 
             <motion.p
               variants={item}
-              className="mt-8 md:mt-10 font-serif text-3xl sm:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl leading-tight"
+              className="mt-8 md:mt-10 font-serif text-4xl xl:text-5xl leading-tight"
             >
               25 de abril
             </motion.p>
 
-            <motion.p variants={item} className="mt-3 md:mt-4 text-lg md:text-xl lg:text-xl xl:text-2xl text-secondary">
+            <motion.p variants={item} className="mt-3 md:mt-4 text-2xl xl:text-3xl text-secondary">
               às 16h
             </motion.p>
 
@@ -142,16 +142,16 @@ export function MessageAndEvent() {
               className="mt-8 md:mt-10 space-y-3 md:space-y-4 text-secondary/90 text-base md:text-lg leading-relaxed"
             >
               <div className="text-xl md:text-2xl lg:text-2xl xl:text-3xl font-medium text-foreground">
-                vila clemente
+                Vila Clemente
                 <div className="text-sm md:text-base text-secondary/70 mt-1">
                   — espaço de eventos —
                 </div>
               </div>
 
               <div className="mt-5 md:mt-6 text-sm md:text-base lg:text-base xl:text-lg">
-                rua sebastião de castro e silva<br />
-                banguê i, pacajus – ceará<br />
-                próximo à rodoviária de pacajus
+                Rua: Sebastião de Castro e Silva<br />
+                Banguê i, Pacajus – Ceará<br />
+                <span className="text-xs lg:text-base">*próximo à rodoviária de Pacajus</span>
               </div>
             </motion.div>
 

@@ -42,7 +42,7 @@ export function Countdown() {
   }, []);
 
   return (
-    <div className="mt-6 flex justify-center gap-3 text-foreground">
+    <div className="mt-6 flex justify-center gap-3 text-background">
       <TimeBlock value={timeLeft.days} label="dias" />
       <TimeBlock value={timeLeft.hours} label="horas" />
       <TimeBlock value={timeLeft.minutes} label="min" />
@@ -59,11 +59,11 @@ function TimeBlock({
   label: string;
 }) {
   return (
-    <div className="flex flex-col items-center w-[50px]">
+    <div className="flex flex-col bg-accent rounded-full p-2 items-center w-[50px]">
       <span className="text-base md:text-lg font-serif leading-none">
         {String(value).padStart(2, "0")}
       </span>
-      <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-secondary">
+      <span className="mt-1 text-[9px] uppercase text-background">
         {label}
       </span>
     </div>
