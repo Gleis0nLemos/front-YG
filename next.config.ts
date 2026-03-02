@@ -19,7 +19,7 @@ const nextConfig = {
   },
 
   devIndicators:  false,
-  output: 'standalone',
+  output: 'export',
 };
 
 module.exports = nextConfig;
