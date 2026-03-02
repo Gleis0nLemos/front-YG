@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Pencil, RefreshCw } from "lucide-react";
 import { useConfirmations, Confirmation } from "@/app/context/ConfirmContext";
-import { exportCSV } from "@/app/utils/exportCsv";
+// import { exportCSV } from "@/app/utils/exportCsv";
 
 function exitAdminMode() {
   localStorage.removeItem("isAdmin");
@@ -87,12 +87,12 @@ export function AdminConfirmList() {
           <h3 className="text-xs uppercase tracking-widest text-secondary">Visão admin</h3>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <button
+            {/* <button
               onClick={() => exportCSV(confirmations)}
               className="rounded-full px-5 py-2 text-xs uppercase tracking-widest border border-accent text-accent hover:bg-accent hover:text-background transition"
             >
               Exportar CSV
-            </button>
+            </button> */}
 
             <button
               onClick={refreshConfirmations}

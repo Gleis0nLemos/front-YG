@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Hero } from "@/app/components/Hero";
 import { MessageAndEvent } from "@/app/components/MessageAndEvent";
@@ -8,19 +8,38 @@ import { Footer } from "@/app/components/Footer";
 import { AdminConfirmList } from "./components/AdminConfirmList";
 
 import { useAdminGate } from "./utils/useAdminGate";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function Home() {
+function PageContent() {
   const { isAdmin } = useAdminGate();
 
+  return (
+    <div key={isAdmin ? "admin-view" : "guest-view"} suppressHydrationWarning>
+      {isAdmin ? (
+        <>
+          <GiftList key="giftlist-admin" />
+          <ConfirmSection />
+          <AdminConfirmList />
+          <Footer />
+        </>
+      ) : (
+        <>
+          <Hero />
+          <MessageAndEvent />
+          <GiftList key="giftlist-guest" />
+          <ConfirmSection />
+          <Footer />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true);
-    }, 0);
-
-    return () => clearTimeout(timer);
+    setMounted(true);
   }, []);
 
   if (!mounted) {
@@ -32,25 +51,12 @@ export default function Home() {
   }
 
   return (
-    <div key={isAdmin ? "admin-view" : "guest-view"} suppressHydrationWarning>
-      {isAdmin ? (
-        <>
-          {/* Chave única força recriação do GiftList no modo admin */}
-          <GiftList key="giftlist-admin" />
-          <ConfirmSection />
-          <AdminConfirmList />
-          <Footer />
-        </>
-      ) : (
-        <>
-          <Hero />
-          <MessageAndEvent />
-          {/* Chave única força recriação do GiftList no modo convidado */}
-          <GiftList key="giftlist-guest" />
-          <ConfirmSection />
-          <Footer />
-        </>
-      )}
-    </div>
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center text-secondary">
+        Carregando página...
+      </div>
+    }>
+      <PageContent />
+    </Suspense>
   );
 }
