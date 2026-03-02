@@ -1,6 +1,5 @@
 import { motion, Variants } from "framer-motion";
 
-// Variant para entrada inicial (mantido como estava)
 const paletteItem: Variants = {
   hidden: { opacity: 0, scale: 0.92 },
   visible: {

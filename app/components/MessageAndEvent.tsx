@@ -33,7 +33,7 @@ export function MessageAndEvent() {
           initial="hidden"
           animate="visible"
         >
-          {/* Floral – menor em lg, cresce em xl+ */}
+          {/* Floral  */}
           <motion.div
             variants={fade}
             className="
@@ -101,7 +101,7 @@ export function MessageAndEvent() {
             </div>
           </motion.div>
 
-          {/* Detalhes do Evento – em lg ocupa toda a linha (col-span-2), em xl volta para 4/12 */}
+          {/* Detalhes do Evento */}
           <motion.div
             id="localizacao" 
             variants={container}

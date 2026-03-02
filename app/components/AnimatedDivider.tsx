@@ -11,7 +11,7 @@ export default function AnimatedDivider() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Linha principal com leve ondulação orgânica */}
+        
         <motion.path
           d="
             M 0 30
@@ -30,7 +30,7 @@ export default function AnimatedDivider() {
           transition={{ duration: 2.4, ease: "easeInOut" }}
         />
 
-        {/* Linha secundária sutil por baixo (sombra / profundidade) */}
+        
         <motion.path
           d="
             M 0 34
@@ -49,9 +49,9 @@ export default function AnimatedDivider() {
           transition={{ duration: 2.6, delay: 0.3, ease: "easeOut" }}
         />
 
-        {/* Folhas / raminhos decorativos */}
+        
         <motion.g>
-          {/* Folha maior esquerda */}
+          
           <motion.path
             d="M 148 24 Q 158 12, 172 22 Q 165 30, 148 24 Z"
             fill="#7a8f78"
@@ -61,7 +61,7 @@ export default function AnimatedDivider() {
             transition={{ delay: 1.1, duration: 0.7, type: "spring", stiffness: 180 }}
           />
 
-          {/* Folha média direita */}
+          
           <motion.path
             d="M 268 36 Q 280 26, 292 38 Q 282 46, 268 36 Z"
             fill="#6b7e66"
@@ -71,7 +71,7 @@ export default function AnimatedDivider() {
             transition={{ delay: 1.4, duration: 0.7, type: "spring", stiffness: 160 }}
           />
 
-          {/* Raminho fino com duas folhinhas */}
+          
           <motion.path
             d="M 312 22 L 328 18 M 322 26 L 336 30"
             stroke="#7a8f78"
@@ -84,7 +84,7 @@ export default function AnimatedDivider() {
           />
         </motion.g>
 
-        {/* Partículas / pontinhos sutis no final (opcional - dá vida) */}
+        
         <motion.circle
           cx="398"
           cy="28"

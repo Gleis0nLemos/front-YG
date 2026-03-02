@@ -75,7 +75,7 @@ export function HeroGallery() {
     return "hidden";
   };
 
-  // Limpa timeout ao desmontar
+  
   useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -90,10 +90,9 @@ export function HeroGallery() {
       onMouseEnter={handleInteraction}
       onMouseLeave={handleLeave}
       onTouchStart={handleInteraction}
-      // onTouchEnd mantido para pausar um pouco mais longo se quiser, mas o timeout já cuida
+      
       onTouchEnd={() => {
-        // Opcional: pausar um pouco mais longo em mobile após toque
-        // setTimeout(() => setPaused(false), 8000);
+        
       }}
     >
       {photos.map((photo, i) => {
@@ -143,7 +142,7 @@ export function HeroGallery() {
         );
       })}
 
-      {/* Setas */}
+      {/* arrows */}
       <button
         onClick={() => {
           setIndex((prev) => (prev - 1 + photos.length) % photos.length);
@@ -174,7 +173,7 @@ export function HeroGallery() {
         <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
 
-      {/* Dots – também controlados pelo mesmo estado */}
+      {/* Dots –  */}
       <div
         className={`
           absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 md:gap-2 lg:gap-2.5 z-30

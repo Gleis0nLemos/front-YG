@@ -8,7 +8,7 @@ export function useAdminGate() {
   const param = searchParams.get("admin");
 
   if (typeof window !== "undefined") {
-    if (param === "amor2025") {
+    if (param === "2026yg") {
       localStorage.setItem("isAdmin", "true");
       return { isAdmin: true };
     }

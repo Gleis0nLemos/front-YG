@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import qrcode from "@/app/assets/qrcode.png"
 import { FloralRomantico } from "./FloralRomantico2";
-// import { HeraEntrelaçada } from "./HeraEntrelaçada";
 
 export function Footer() {
   const [copied, setCopied] = useState(false);
@@ -20,7 +19,7 @@ export function Footer() {
     <footer className="py-10 bg-zinc-950 px-8 xl:px-0 text-gray-400 text-sm ">
       <div className="max-w-7xl mx-auto flex flex-col items-center gap-6 lg:flex-row lg:justify-between lg:items-center">
         
-        {/* Esquerda: Copyright + corações */}
+        
         <div className="text-center md:text-center pt-8 xl:pt-0 order-3 lg:order-1">
           <p className="mt-1 text-gray-500">
             Com carinho!
@@ -31,15 +30,15 @@ export function Footer() {
           
         </div>
 
-        {/* Centro ou direita: Área PIX */}
+        
         <div id="pix" className="flex flex-col items-center order-2 lg:order-2">
           
           
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
             <div className="py-2 rounded-xl shadow-md">
-              {/* Substitua pelo seu QR Code real (salve em public/pix-qr.png) */}
+              
               <Image
-                src={qrcode} // coloque o arquivo na pasta public/
+                src={qrcode}
                 alt="QR Code PIX - Gleison & Yasmim"
                 width={200}
                 height={200}
@@ -65,9 +64,9 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Decoração sutil: pequeno ramo de oliveira minimalista */}
+        
         <div className="opacity-70 scale-90 sm:scale-100 sm:opacity-85 order-1 lg:order-3">
-          {/* Você pode usar SVG inline ou imagem. Aqui um SVG simples */}
+          
           <FloralRomantico />
         </div>
       </div>

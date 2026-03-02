@@ -6,7 +6,7 @@ const dividerVariants: Variants = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: {
     pathLength: 1,
-    opacity: 0.9, // mais visível
+    opacity: 0.9, 
     transition: {
       duration: 1.5,
       ease: "easeOut",
@@ -16,9 +16,9 @@ const dividerVariants: Variants = {
 
 export function SubtleDivider() {
   return (
-    <div className="relative mx-auto my-8 w-3/4 max-w-xs md:max-w-sm"> {/* my-8 reduz o espaçamento vertical */}
+    <div className="relative mx-auto my-8 w-3/4 max-w-xs md:max-w-sm"> 
       <motion.svg
-        className="w-full h-6 text-accent" // altura reduzida + cor mais forte
+        className="w-full h-6 text-accent" 
         viewBox="0 0 400 40"
         fill="none"
         stroke="currentColor"
@@ -28,20 +28,20 @@ export function SubtleDivider() {
         initial="hidden"
         animate="visible"
       >
-        {/* Linha principal */}
+        
         <motion.path
           variants={dividerVariants}
           d="M 20 20 H 380"
         />
 
-        {/* Ramo esquerdo integrado */}
+        
         <motion.g variants={dividerVariants}>
           <motion.path d="M 20 20 Q 10 15, 5 20 Q 10 25, 20 20" />
           <motion.path d="M 12 18 Q 5 12, 0 15" />
           <motion.path d="M 12 22 Q 5 28, 0 25" />
         </motion.g>
 
-        {/* Ramo direito integrado */}
+        
         <motion.g variants={dividerVariants}>
           <motion.path d="M 380 20 Q 390 15, 395 20 Q 390 25, 380 20" />
           <motion.path d="M 388 18 Q 395 12, 400 15" />

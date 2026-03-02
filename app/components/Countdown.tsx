@@ -27,12 +27,12 @@ function getTimeLeft(targetDate: Date): TimeLeft {
 }
 
 export function Countdown() {
-  // ✅ inicialização correta (sem effect)
+  
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
     getTimeLeft(TARGET_DATE)
   );
 
-  // ✅ effect apenas para sincronizar com o "sistema externo" (tempo)
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(getTimeLeft(TARGET_DATE));

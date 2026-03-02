@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   onAdd: (data: {
     name: string;
-    link: string;
-    image: string;
+    description: string;
+    productUrl: string;
+    imageUrl: string;
   }) => void;
 };
 
@@ -15,28 +16,37 @@ export function AddGiftButton({ onAdd }: Props) {
   const [open, setOpen] = useState(false);
 
   const [name, setName] = useState("");
-  const [link, setLink] = useState("");
-  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [productUrl, setProductUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleInputChange = (
+    setter: React.Dispatch<React.SetStateAction<string>>,
+  ) => (e: ChangeEvent<HTMLInputElement>) => {
+    setter(e.target.value);
+  };
 
   function handleSubmit() {
     if (!name.trim()) return;
 
     onAdd({
       name: name.trim(),
-      link: link.trim(),
-      image: image.trim(),
+      description: description.trim(),
+      productUrl: productUrl.trim(),
+      imageUrl: imageUrl.trim(),
     });
 
+    // clean form
     setName("");
-    setLink("");
-    setImage("");
+    setDescription("");
+    setProductUrl("");
+    setImageUrl("");
 
     setOpen(false);
   }
 
   return (
     <>
-      {/* Botão */}
       <motion.button
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
@@ -55,7 +65,6 @@ export function AddGiftButton({ onAdd }: Props) {
         + Adicionar presente
       </motion.button>
 
-      {/* Modal */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -77,8 +86,8 @@ export function AddGiftButton({ onAdd }: Props) {
 
               <input
                 value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Nome do presente"
+                onChange={handleInputChange(setName)}
+                placeholder="Nome do presente *"
                 className="
                   w-full rounded-lg border px-4 py-2
                   text-sm outline-none
@@ -87,9 +96,9 @@ export function AddGiftButton({ onAdd }: Props) {
               />
 
               <input
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-                placeholder="Link do modelo (opcional)"
+                value={description}
+                onChange={handleInputChange(setDescription)}
+                placeholder="Descrição (opcional)"
                 className="
                   w-full rounded-lg border px-4 py-2
                   text-sm outline-none
@@ -98,9 +107,9 @@ export function AddGiftButton({ onAdd }: Props) {
               />
 
               <input
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-                placeholder="URL da foto (opcional)"
+                value={productUrl}
+                onChange={handleInputChange(setProductUrl)}
+                placeholder="Link do produto (ex: Magazine Luiza)"
                 className="
                   w-full rounded-lg border px-4 py-2
                   text-sm outline-none
@@ -108,13 +117,26 @@ export function AddGiftButton({ onAdd }: Props) {
                 "
               />
 
-              {/* Preview da imagem */}
-              {image && (
+              <input
+                value={imageUrl}
+                onChange={handleInputChange(setImageUrl)}
+                placeholder="URL da foto do produto (opcional)"
+                className="
+                  w-full rounded-lg border px-4 py-2
+                  text-sm outline-none
+                  focus:ring-1 focus:ring-accent
+                "
+              />
+
+              {imageUrl && (
                 <div className="pt-2">
                   <img
-                    src={image}
+                    src={imageUrl}
                     alt="Preview"
                     className="rounded-lg w-full h-32 object-cover border"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                    }}
                   />
                 </div>
               )}

@@ -142,7 +142,6 @@ export function FloralRomantico() {
             max-w-[16rem]           // limite superior forte
           "
         >
-          {/* Aro principal com pulsar leve */}
           <m.circle
             cx={centerX}
             cy={centerY}
@@ -163,7 +162,7 @@ export function FloralRomantico() {
             }}
           />
 
-          {/* Círculo interno */}
+          
           <m.circle
             cx={centerX}
             cy={centerY}
@@ -176,7 +175,7 @@ export function FloralRomantico() {
             transition={{ duration: 5.5, delay: 1.5, ease: "easeOut" }}
           />
 
-          {/* Centro Y & G */}
+          
           <m.g
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -228,7 +227,7 @@ export function FloralRomantico() {
             </g>
           </m.g>
 
-          {/* Flores principais */}
+          
           {flowerPositions.map((pos, i) => {
             const { x, y } = getPosition(pos.angle);
             const rotOffset = pos.petalRotationOffset;
@@ -288,7 +287,7 @@ export function FloralRomantico() {
             );
           })}
 
-          {/* Folhas no aro */}
+          
           {leafPositionsOnRim.map((pos, i) => {
             const { x, y } = getPosition(pos.angle);
             return (
@@ -314,7 +313,7 @@ export function FloralRomantico() {
             );
           })}
 
-          {/* Flores caindo */}
+          
           {fallingFlowers.map((f) => (
             <m.g
               key={`fall-f-${f.index}`}
@@ -351,7 +350,7 @@ export function FloralRomantico() {
             </m.g>
           ))}
 
-          {/* Folhas caindo */}
+          
           {fallingLeaves.map((l) => (
             <m.path
               key={`fall-leaf-${l.index}`}

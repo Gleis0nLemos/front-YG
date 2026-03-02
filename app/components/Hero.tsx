@@ -51,7 +51,7 @@ export function Hero() {
             overflow-hidden lg:overflow-visible
           "
         >
-          {/* Coluna de texto */}
+          {/* Text */}
           <div className="flex justify-center order-2 lg:order-1 px-5 sm:px-6 lg:px-0">
             <motion.div
               className="w-full max-w-xl text-center"
@@ -75,12 +75,6 @@ export function Hero() {
                 (Mário Quintana)
               </motion.p>
 
-              {/* <motion.p
-                variants={item}
-                className="text-base text-secondary font-sans font-medium mb-1"
-              >
-                Juntamente com seus pais
-              </motion.p> */}
 
               <motion.p
                 variants={item}
@@ -121,7 +115,7 @@ export function Hero() {
                 <Countdown />
               </motion.div>
 
-              {/* Botões de ação */}
+              {/* action buttons */}
               <motion.div
                 variants={item}
                 className="grid grid-cols-4 gap-3 sm:gap-4 max-w-sm sm:max-w-md mx-auto"
@@ -166,7 +160,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Coluna da galeria */}
+          {/* Gallery */}
           <div className="order-1 lg:order-2 flex justify-center lg:justify-start">
             <div className="w-full lg:max-w-[520px] xl:max-w-[580px]">
               <HeroGallery />

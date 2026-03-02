@@ -133,7 +133,7 @@ export function FloralRomantico() {
           xmlns="http://www.w3.org/2000/svg"
           className="w-80 h-80 lg:w-[23rem] lg:h-[23rem] text-accent drop-shadow-2xl"
         >
-          {/* Aro principal com pulsar leve */}
+          
           <m.circle
             cx={centerX}
             cy={centerY}
@@ -154,7 +154,7 @@ export function FloralRomantico() {
             }}
           />
 
-          {/* Círculo interno */}
+          
           <m.circle
             cx={centerX}
             cy={centerY}
@@ -167,8 +167,7 @@ export function FloralRomantico() {
             transition={{ duration: 5.5, delay: 1.5, ease: "easeOut" }}
           />
 
-          {/* Centro exato como na referência: Y & G com linhas diagonais e folhas nos cantos */}
-          {/* Centro clean: Y & G ainda menores, & bem menor que as iniciais */}
+          
 <m.g
   initial={{ opacity: 0, scale: 0.7 }}
   animate={{ opacity: 1, scale: 1 }}
@@ -181,7 +180,7 @@ export function FloralRomantico() {
   }}
 >
   <g transform={`translate(${centerX}, ${centerY})`}>
-    {/* Y à esquerda – menor ainda */}
+    
     <text
       x="-32"
       y="12"
@@ -195,7 +194,7 @@ export function FloralRomantico() {
       Y
     </text>
 
-    {/* & central – bem menor que Y e G */}
+    
     <text
       x="0"
       y="18"
@@ -209,7 +208,7 @@ export function FloralRomantico() {
       &
     </text>
 
-    {/* G à direita – menor ainda */}
+    
     <text
       x="32"
       y="12"
@@ -225,7 +224,7 @@ export function FloralRomantico() {
   </g>
 </m.g>
 
-          {/* Flores principais - mantidas iguais */}
+          
           {flowerPositions.map((pos, i) => {
             const { x, y } = getPosition(pos.angle);
             const rotOffset = pos.petalRotationOffset;
@@ -290,7 +289,7 @@ export function FloralRomantico() {
             );
           })}
 
-          {/* Folhas no aro */}
+          
           {leafPositionsOnRim.map((pos, i) => {
             const { x, y } = getPosition(pos.angle);
             return (
@@ -316,7 +315,7 @@ export function FloralRomantico() {
             );
           })}
 
-          {/* Flores caindo */}
+          
           {fallingFlowers.map((f) => (
             <m.g
               key={`fall-f-${f.index}`}
@@ -353,7 +352,7 @@ export function FloralRomantico() {
             </m.g>
           ))}
 
-          {/* Folhas caindo */}
+          
           {fallingLeaves.map((l) => (
             <m.path
               key={`fall-leaf-${l.index}`}
