@@ -144,7 +144,7 @@ export function Hero() {
                     </a>
                     <span
                       className="
-                        text-xs uppercase tracking-wider
+                        text-xs uppercase md:tracking-wider
                         text-secondary/90 font-medium text-center
                         leading-tight
                       "
