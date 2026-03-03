@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import photo1 from "@/public/yg1.png";
-import photo2 from "@/public/yg2.png";
-import photo3 from "@/public/yg3.png";
-import photo4 from "@/public/yg4.png";
+import photo1 from "@/app/assets/yg1.png";
+import photo2 from "@/app/assets/yg2.png";
+import photo3 from "@/app/assets/yg3.png";
+import photo4 from "@/app/assets/yg4.png";
 
 const photos = [photo1, photo2, photo3, photo4];
 

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import qrcode from "@/public/qrcode.png";
+import qrcode from "@/app/assets/qrcode.png";
 import { FloralRomantico } from "./FloralRomantico2";
 
 export function Footer() {
