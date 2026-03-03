@@ -6,7 +6,7 @@ import { useConfirmations } from "@/app/context/ConfirmContext";
 import { Minus, Plus, Loader2 } from "lucide-react";
 import Image from "next/image";
 
-import flor from "@/app/assets/flor.png";
+import flor from "@/public/flor.png";
 
 export function ConfirmSection() {
   const { addConfirmation } = useConfirmations();
