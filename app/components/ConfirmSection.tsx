@@ -54,9 +54,9 @@ export function ConfirmSection() {
 
       
       if (going === "yes") {
-        setToastMessage("Presença confirmada com sucesso! 🎉 Obrigado por vir!");
+        setToastMessage("Presença confirmada com sucesso! 🎉");
       } else {
-        setToastMessage("Que pena... Sentiremos sua falta! ❤️ Obrigado mesmo assim!");
+        setToastMessage("Que pena... Sentiremos sua falta! ❤️");
       }
 
       setTimeout(() => setToastMessage(null), 5000); // disappear before 5 seconds
@@ -248,13 +248,13 @@ export function ConfirmSection() {
       <AnimatePresence>
         {toastMessage && (
           <motion.div
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-4 rounded-full text-sm shadow-2xl flex items-center gap-3 z-50 max-w-md mx-4"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-4 rounded-full text-sm shadow-2xl flex items-center justify-center gap-3 z-50 max-w-[90vw] overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.4 }}
           >
-            <span>{toastMessage}</span>
+            <span className="whitespace-nowrap overflow-hidden text-ellipsis">{toastMessage}</span>
           </motion.div>
         )}
       </AnimatePresence>
