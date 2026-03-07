@@ -1,16 +1,12 @@
 "use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useConfirmations } from "@/app/context/ConfirmContext";
 import { Minus, Plus, Loader2 } from "lucide-react";
 import Image from "next/image";
-
 import flor from "@/app/assets/flor.png";
-
 export function ConfirmSection() {
   const { addConfirmation } = useConfirmations();
-
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [going, setGoing] = useState<"yes" | "no" | null>(null);
@@ -19,23 +15,18 @@ export function ConfirmSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const total = adults + kids; 
-
+  const total = adults + kids;
   const canSubmit =
     name.trim().length >= 2 &&
     phone.trim().length >= 10 &&
     going !== null &&
     (going === "no" || adults >= 1) &&
     !isSubmitting;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSubmit) return;
-
     setIsSubmitting(true);
     setSubmitError(null);
-
     try {
       await addConfirmation({
         name: name.trim(),
@@ -44,27 +35,22 @@ export function ConfirmSection() {
         adults: going === "yes" ? adults : 0,
         children: going === "yes" ? kids : 0,
       });
-
       // clean form
       setName("");
       setPhone("");
       setGoing(null);
       setAdults(1);
       setKids(0);
-
-      
+    
       if (going === "yes") {
         setToastMessage("Presença confirmada com sucesso! 🎉");
       } else {
         setToastMessage("Que pena... Sentiremos sua falta! ❤️");
       }
-
       setTimeout(() => setToastMessage(null), 5000); // disappear before 5 seconds
     } catch (err: unknown) {
       console.error("Erro ao confirmar:", err);
-
       let errorMessage = "Não foi possível confirmar. Por favor, tente novamente.";
-
       if (err instanceof Error) {
         errorMessage = err.message;
       } else if (typeof err === "string") {
@@ -72,24 +58,21 @@ export function ConfirmSection() {
       } else if (err && typeof err === "object" && "message" in err) {
         errorMessage = (err as { message: string }).message;
       }
-
       setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
-
   const adjust = (type: "adults" | "kids", delta: number) => {
     const min = type === "adults" ? 1 : 0;
     if (type === "adults") setAdults((v) => Math.max(min, v + delta));
     else setKids((v) => Math.max(min, v + delta));
   };
-
   return (
     <>
       <section id="confirmacao" className="py-16 md:py-24 md:mt-24 px-5 sm:px-8 bg-linear-180 from-background via-background/10 to-soft">
         <div className="max-w-lg mx-auto">
-          
+        
           <div className="flex items-center justify-center mb-6 flex-wrap">
             <h2 className="text-center font-serif text-2xl md:text-3xl">
               Confirmar presença
@@ -105,7 +88,6 @@ export function ConfirmSection() {
               />
             </div>
           </div>
-
           <form onSubmit={handleSubmit} className="space-y-6">
             <input
               value={name}
@@ -116,7 +98,6 @@ export function ConfirmSection() {
               minLength={2}
               disabled={isSubmitting}
             />
-
             <input
               type="tel"
               value={phone}
@@ -127,7 +108,6 @@ export function ConfirmSection() {
               minLength={10}
               disabled={isSubmitting}
             />
-
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
@@ -141,7 +121,6 @@ export function ConfirmSection() {
               >
                 Vou comparecer
               </button>
-
               <button
                 type="button"
                 onClick={() => setGoing("no")}
@@ -155,7 +134,6 @@ export function ConfirmSection() {
                 Não poderei ir
               </button>
             </div>
-
             <AnimatePresence>
               {going === "yes" && (
                 <motion.div
@@ -171,7 +149,6 @@ export function ConfirmSection() {
                     {(["adults", "kids"] as const).map((type) => {
                       const label = type === "adults" ? "Adultos (incl. você)" : "Crianças";
                       const value = type === "adults" ? adults : kids;
-
                       return (
                         <div
                           key={type}
@@ -180,7 +157,6 @@ export function ConfirmSection() {
                           <span className="text-sm font-medium text-gray-700">
                             {label}
                           </span>
-
                           <div className="flex justify-center items-center gap-0">
                             <button
                               type="button"
@@ -190,15 +166,13 @@ export function ConfirmSection() {
                             >
                               <Minus size={16} strokeWidth={2.5} />
                             </button>
-
                             <span className="w-8 text-center text-base font-semibold tabular-nums text-gray-800">
                               {value}
                             </span>
-
                             <button
                               type="button"
                               onClick={() => adjust(type, 1)}
-                              disabled={isSubmitting}
+                              disabled={isSubmitting || total >= 5}
                               className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition text-gray-700"
                             >
                               <Plus size={16} strokeWidth={2.5} />
@@ -208,7 +182,6 @@ export function ConfirmSection() {
                       );
                     })}
                   </div>
-
                   {adults < 1 && (
                     <p className="text-xs text-amber-700 text-center mt-3">
                       Selecione pelo menos 1 adulto (você)
@@ -217,7 +190,6 @@ export function ConfirmSection() {
                 </motion.div>
               )}
             </AnimatePresence>
-
             <button
               type="submit"
               disabled={!canSubmit}
@@ -236,14 +208,12 @@ export function ConfirmSection() {
                 "Confirmar"
               )}
             </button>
-
             {submitError && (
               <p className="text-red-600 text-sm text-center mt-2">{submitError}</p>
             )}
           </form>
         </div>
       </section>
-
       {/* Toast message */}
       <AnimatePresence>
         {toastMessage && (
