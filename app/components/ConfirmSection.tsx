@@ -173,7 +173,7 @@ export function ConfirmSection() {
                               type="button"
                               onClick={() => adjust(type, 1)}
                               disabled={isSubmitting || total >= 5}
-                              className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition text-gray-700"
+                              className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-40 transition text-gray-700"
                             >
                               <Plus size={16} strokeWidth={2.5} />
                             </button>
