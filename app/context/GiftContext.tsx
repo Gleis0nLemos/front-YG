@@ -82,10 +82,17 @@ export function GiftProvider({ children }: { children: ReactNode }) {
     return () => controller.abort();
   }, []);
 
-  // Calcula o total de páginas (com useMemo)
-  const totalPages = Math.ceil(gifts.length / itemsPerPage);
+  // não reservados primeiro, depois os reservados
+  const sortedGifts = useMemo(() => {
+    return [...gifts].sort((a, b) => {
+      if (a.reserved === b.reserved) return 0; 
+      return a.reserved ? 1 : -1; 
+    });
+  }, [gifts]);
 
-  // Ajusta página atual se necessário
+  // Total de páginas baseado na lista ordenada
+  const totalPages = Math.ceil(sortedGifts.length / itemsPerPage);
+
   useEffect(() => {
     if (totalPages > 0 && currentPage > totalPages) {
       setCurrentPage(totalPages);
@@ -95,11 +102,12 @@ export function GiftProvider({ children }: { children: ReactNode }) {
     }
   }, [totalPages, currentPage]);
 
+  // lista ordenada
   const paginatedGifts = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    return gifts.slice(start, end);
-  }, [gifts, currentPage, itemsPerPage]);
+    return sortedGifts.slice(start, end);
+  }, [sortedGifts, currentPage, itemsPerPage]);
 
   const addGift = async (data: { name: string; description: string; productUrl: string; imageUrl: string }) => {
     if (!data.name.trim()) throw new Error("Nome obrigatório");

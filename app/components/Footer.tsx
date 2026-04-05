@@ -9,7 +9,7 @@ export function Footer() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("gomesyasmim899@gmail.com").then(() => {
+    navigator.clipboard.writeText("070.347.383-27").then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -51,7 +51,7 @@ export function Footer() {
                 Se quiser nos ajudar com um pix,<br /> qualquer valor é bem vindo!
               </p>
               <p className="text-xs text-gray-500 mb-2">
-                Chave: gomesyasmim899@gmail.com<br />
+                Chave: 070.347.383-27<br />
                 Qualquer valor é super bem-vindo! 💚
               </p>
               <button
